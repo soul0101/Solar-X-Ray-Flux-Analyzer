@@ -14,6 +14,11 @@ import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 from datetime import datetime, timedelta
 
+import sys, asyncio
+
+if sys.platform == "win32" and (3, 8, 0) <= sys.version_info < (3, 9, 0):
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
 @st.cache()
 def fetch_data(tstart, tend, columns=["xrsa", "xrsb"]):
     """
